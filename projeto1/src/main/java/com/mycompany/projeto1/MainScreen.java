@@ -26,93 +26,157 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnViewProducts = new javax.swing.JButton();
+        btnAddProduct = new javax.swing.JButton();
+        btnRemoveProduct = new javax.swing.JButton();
+        btnSetProductQtt = new javax.swing.JButton();
+        btnGenReport = new javax.swing.JButton();
         btnLogOff = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnReserveProduct = new javax.swing.JButton();
+        lblMainScreen = new javax.swing.JLabel();
+        btnHelp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(500, 250, 0, 0));
+        setResizable(false);
 
-        jButton6.setText("Visualizar Produtos");
-        jButton6.setFocusPainted(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnViewProducts.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        btnViewProducts.setText("Visualizar Produtos");
+        btnViewProducts.setFocusPainted(false);
+        btnViewProducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnViewProductsActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Adicionar Produto");
-        jButton7.setFocusPainted(false);
-
-        jButton8.setText("Remover Produto");
-        jButton8.setFocusPainted(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnAddProduct.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        btnAddProduct.setText("Adicionar Produto");
+        btnAddProduct.setFocusPainted(false);
+        btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnAddProductActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Atualizar Quantidade de Produto");
-        jButton9.setFocusPainted(false);
+        btnRemoveProduct.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        btnRemoveProduct.setText("Remover Produto");
+        btnRemoveProduct.setFocusPainted(false);
+        btnRemoveProduct.setPreferredSize(new java.awt.Dimension(130, 60));
+        btnRemoveProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveProductActionPerformed(evt);
+            }
+        });
 
-        jButton10.setText("Emitir Relatórios");
-        jButton10.setFocusPainted(false);
+        btnSetProductQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        btnSetProductQtt.setText("Atualizar Quantidade de Produto");
+        btnSetProductQtt.setFocusPainted(false);
+        btnSetProductQtt.setPreferredSize(new java.awt.Dimension(130, 60));
+        btnSetProductQtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetProductQttActionPerformed(evt);
+            }
+        });
 
+        btnGenReport.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        btnGenReport.setText("Emitir Relatórios");
+        btnGenReport.setFocusPainted(false);
+        btnGenReport.setPreferredSize(new java.awt.Dimension(130, 60));
+
+        btnLogOff.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
         btnLogOff.setText("Sair");
         btnLogOff.setFocusPainted(false);
+        btnLogOff.setMaximumSize(new java.awt.Dimension(94, 45));
+        btnLogOff.setMinimumSize(new java.awt.Dimension(94, 45));
+        btnLogOff.setPreferredSize(new java.awt.Dimension(94, 45));
         btnLogOff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogOffActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Reservar Produto");
+        btnReserveProduct.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        btnReserveProduct.setText("Reservar Produto");
+        btnReserveProduct.setFocusPainted(false);
+        btnReserveProduct.setPreferredSize(new java.awt.Dimension(130, 60));
+
+        lblMainScreen.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
+        lblMainScreen.setText("Sistema de Gerenciamento de Estoque");
+
+        btnHelp.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
+        btnHelp.setText("Ajuda");
+        btnHelp.setContentAreaFilled(false);
+        btnHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHelp.setFocusPainted(false);
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addComponent(btnLogOff)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnHelp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLogOff, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnRemoveProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSetProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(191, 191, 191))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(lblMainScreen)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnViewProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(btnAddProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnReserveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGenReport, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10)
-                    .addComponent(btnLogOff)
-                    .addComponent(jButton1))
-                .addContainerGap(475, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMainScreen)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnViewProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReserveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGenReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRemoveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSetProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(68, 68, 68)
+                        .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void btnViewProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProductsActionPerformed
+        ViewProduct form1 = new ViewProduct();
+        
+        form1.setVisible(true);
+    }//GEN-LAST:event_btnViewProductsActionPerformed
 
     private void btnLogOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOffActionPerformed
         Login form1 = new Login();
@@ -121,9 +185,25 @@ public class MainScreen extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnLogOffActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProductActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnRemoveProductActionPerformed
+
+    private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
+        AddProduct form1 = new AddProduct();
+        
+        form1.setVisible(true);
+    }//GEN-LAST:event_btnAddProductActionPerformed
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHelpActionPerformed
+
+    private void btnSetProductQttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetProductQttActionPerformed
+        SetProductQtt form1 = new SetProductQtt();
+        
+        form1.setVisible(true);
+    }//GEN-LAST:event_btnSetProductQttActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +233,7 @@ public class MainScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainScreen().setVisible(true);
@@ -161,12 +242,14 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddProduct;
+    private javax.swing.JButton btnGenReport;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnLogOff;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btnRemoveProduct;
+    private javax.swing.JButton btnReserveProduct;
+    private javax.swing.JButton btnSetProductQtt;
+    private javax.swing.JButton btnViewProducts;
+    private javax.swing.JLabel lblMainScreen;
     // End of variables declaration//GEN-END:variables
 }
