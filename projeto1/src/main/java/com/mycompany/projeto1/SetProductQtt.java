@@ -42,7 +42,7 @@ public class SetProductQtt extends javax.swing.JFrame {
         btnAddQtt = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setMaximumSize(new java.awt.Dimension(504, 432));
         setMinimumSize(new java.awt.Dimension(504, 432));

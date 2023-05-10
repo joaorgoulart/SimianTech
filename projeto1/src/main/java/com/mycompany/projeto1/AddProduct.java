@@ -38,7 +38,7 @@ public class AddProduct extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setResizable(false);
 

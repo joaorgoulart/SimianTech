@@ -31,7 +31,7 @@ public class ViewProduct extends javax.swing.JFrame {
         listProducts = new javax.swing.JList<>();
         btnClose = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
 
         lblViewProducts.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
