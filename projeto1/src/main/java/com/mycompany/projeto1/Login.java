@@ -5,6 +5,10 @@
 package com.mycompany.projeto1;
 
 import java.awt.Color;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -239,15 +243,50 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        //TODO verify Login and password w/ database
-        if(txtLogin.getText().equals("admin") && new String(txtPassword.getPassword()).equals("123456")){
-            MainScreen form1 = new MainScreen();
-    
-            form1.setVisible(true);
-            this.setVisible(false);
+        //Login test fino do fino
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+        
+        
+        String username = txtLogin.getText();
+        String password = txtPassword.getText();
+        
+        
+        Statement stm = con.createStatement();
+        String sql = "select * from login where username='"+username+"' and Password='"+password+"'";
+        ResultSet rs = stm.executeQuery(sql);
+        
+        
+        if(rs.next()){
+            dispose();
+            MainScreen ms = new MainScreen();
+            ms.show();  
         }else{
-           lblInvalidLogin.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Login ou senha incorretos");
+            txtLogin.setText("");
+            txtPassword.setText("");
+            
         }
+        
+        con.close();
+        
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            
+        }
+        
+        
+        
+        // Old code
+        //if(txtLogin.getText().equals("admin") && new String(txtPassword.getPassword()).equals("123456")){
+           // MainScreen form1 = new MainScreen();
+    
+            //form1.setVisible(true);
+            //this.setVisible(false);
+       // }else{
+          // lblInvalidLogin.setVisible(true);
+       // }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void chkBoxShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkBoxShowPasswordActionPerformed
