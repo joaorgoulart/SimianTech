@@ -47,7 +47,7 @@ public class RemoveProduct extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         lblSelectedProduct = new javax.swing.JLabel();
         txtSelectedProduct = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tableProducts = new javax.swing.JTable();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,7 +152,7 @@ public class RemoveProduct extends javax.swing.JFrame {
                 .addGroup(pnlRemoveProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRemoveProductLayout.createSequentialGroup()
                         .addComponent(btnRemoveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlRemoveProductLayout.createSequentialGroup()
                         .addGroup(pnlRemoveProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,47 +183,17 @@ public class RemoveProduct extends javax.swing.JFrame {
 
         tableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "Produto", "Quantidade"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableProducts.setColumnSelectionAllowed(true);
+        ));
         tableProducts.getTableHeader().setReorderingAllowed(false);
-        tableProducts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProductsMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableProducts);
-        tableProducts.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (tableProducts.getColumnModel().getColumnCount() > 0) {
-            tableProducts.getColumnModel().getColumn(0).setMinWidth(40);
-            tableProducts.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tableProducts.getColumnModel().getColumn(0).setMaxWidth(120);
-            tableProducts.getColumnModel().getColumn(1).setMinWidth(50);
-            tableProducts.getColumnModel().getColumn(1).setPreferredWidth(90);
-            tableProducts.getColumnModel().getColumn(1).setMaxWidth(160);
-            tableProducts.getColumnModel().getColumn(2).setMinWidth(40);
-            tableProducts.getColumnModel().getColumn(2).setPreferredWidth(90);
-            tableProducts.getColumnModel().getColumn(2).setMaxWidth(160);
-        }
+        jScrollPane2.setViewportView(tableProducts);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,17 +202,17 @@ public class RemoveProduct extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblProductName)
-                    .addComponent(lblRemoveProduct)
+                    .addComponent(pnlRemoveProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProductName)
+                            .addComponent(lblRemoveProduct)
                             .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblProductID)
                             .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlRemoveProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -253,7 +223,7 @@ public class RemoveProduct extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProductName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -261,11 +231,12 @@ public class RemoveProduct extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(pnlRemoveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -314,15 +285,6 @@ public class RemoveProduct extends javax.swing.JFrame {
     private void txtSelectedProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSelectedProductActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSelectedProductActionPerformed
-
-    private void tableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMouseClicked
-        tableProducts.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            @Override
-            public void valueChanged(ListSelectionEvent event){
-                txtSelectedProduct.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 1).toString());
-            }
-        });
-    }//GEN-LAST:event_tableProductsMouseClicked
 
     private void btnRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProductActionPerformed
         try{
@@ -384,7 +346,7 @@ public class RemoveProduct extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoveProduct;
     private javax.swing.JButton btnSearchProduct;
     private javax.swing.JFrame jFrame1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblProductID;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblRemoveProduct;
