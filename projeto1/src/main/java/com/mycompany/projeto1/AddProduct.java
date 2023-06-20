@@ -4,6 +4,10 @@
  */
 package com.mycompany.projeto1;
 
+import java.sql.*;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author jrgou
@@ -155,7 +159,40 @@ public class AddProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProductIDActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //TESTE adicionando produtos na table
+        
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+        
+        
+        String product_id = txtProductID.getText();
+        String product_name = txtProductName.getText();
+        String user_id = txtUserID.getText();
+        int quantity = (int) spnnProductQtt.getValue();
+        
+        String sql = "insert into products (product_name, user_id,product_id,quantity)"+"values(?,?,?,?)";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1,product_name);
+        stm.setString(2,user_id);
+        stm.setString(3,product_id);
+        stm.setInt(4,quantity);
+        
+        stm.execute();
+        stm.close();
+       JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso");
+       
+       txtProductID.setText("");
+       txtProductName.setText("");
+       txtUserID.setText("");
+       spnnProductQtt.setValue("0");
+       
+       
+       
+       
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

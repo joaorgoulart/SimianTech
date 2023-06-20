@@ -4,6 +4,8 @@
  */
 package com.mycompany.projeto1;
 
+import java.sql.*;
+
 /**
  *
  * @author jrgou
@@ -119,9 +121,27 @@ public class ViewProduct extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Tentando colocar os nomes pra mostrar */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try{
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+                    
+                    String sql = "select product_name from products";
+                    ResultSet rs = p.executeQuery();
+                    
+                    while(rs.next()){
+                       for(int i = 0;i < 30;i++){
+                        //String names[i] = {"1","2"};
+                        rs.getString("product_name");
+                    }
+                    }
+                 
+                    
+               }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
                 new ViewProduct().setVisible(true);
             }
         });
