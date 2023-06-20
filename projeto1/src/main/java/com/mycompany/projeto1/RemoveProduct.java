@@ -291,7 +291,7 @@ public class RemoveProduct extends javax.swing.JFrame {
             tableProducts.setModel(tableModel);
             
             while(rs.next()){
-                tableModel.addRow();  
+                tableModel.addRow(new Object[]{rs.getInt("user_id"),rs.getString("product_name"),rs.getInt("quantity")});  
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -337,10 +337,6 @@ public class RemoveProduct extends javax.swing.JFrame {
             
             DefaultTableModel tableModel = new DefaultTableModel();
             tableProducts.setModel(tableModel);
-            
-            while(rs.next()){
-                
-            }
             
         }catch(Exception e){
             System.out.println(e.getMessage());

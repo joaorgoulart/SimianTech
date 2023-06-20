@@ -239,7 +239,7 @@ public class SetProductQtt extends javax.swing.JFrame {
             String sql = "select * from products where product_id='" + product_id + "'";
             ResultSet rs = stm.executeQuery(sql);
 
-            txtShowProductName.setText();
+            txtShowProductName.setText(rs.getString("product_name"));
             
             
         }catch(Exception e){

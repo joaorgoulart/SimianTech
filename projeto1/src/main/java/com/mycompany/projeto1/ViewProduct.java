@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -44,8 +47,8 @@ public class ViewProduct extends javax.swing.JFrame {
         txtProductName = new javax.swing.JTextField();
         txtProductID = new javax.swing.JTextField();
         btnSearchProduct = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tableProduts = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tableElements = new javax.swing.JTable();
 
         tableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,49 +169,15 @@ public class ViewProduct extends javax.swing.JFrame {
             }
         });
 
-        tableProduts.setModel(new javax.swing.table.DefaultTableModel(
+        tableElements.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Produto", "Quantidade"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableProduts.setColumnSelectionAllowed(true);
-        tableProduts.getTableHeader().setReorderingAllowed(false);
-        tableProduts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProdutsMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(tableProduts);
-        tableProduts.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (tableProduts.getColumnModel().getColumnCount() > 0) {
-            tableProduts.getColumnModel().getColumn(0).setMinWidth(40);
-            tableProduts.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tableProduts.getColumnModel().getColumn(0).setMaxWidth(120);
-            tableProduts.getColumnModel().getColumn(1).setMinWidth(50);
-            tableProduts.getColumnModel().getColumn(1).setPreferredWidth(90);
-            tableProduts.getColumnModel().getColumn(1).setMaxWidth(160);
-            tableProduts.getColumnModel().getColumn(2).setMinWidth(40);
-            tableProduts.getColumnModel().getColumn(2).setPreferredWidth(90);
-            tableProduts.getColumnModel().getColumn(2).setMaxWidth(160);
-        }
+        ));
+        jScrollPane5.setViewportView(tableElements);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,21 +185,20 @@ public class ViewProduct extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
+                .addComponent(lblViewProducts)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProductName)
-                            .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProductID)
-                            .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblViewProducts)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(lblProductName)
+                    .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProductID)
+                    .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,8 +219,10 @@ public class ViewProduct extends javax.swing.JFrame {
                         .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,15 +249,26 @@ public class ViewProduct extends javax.swing.JFrame {
             String product_id = txtProductID.getText();
 
             Statement stm = con.createStatement();
-            String sql = "select * from products where product_name='" + product_name + "' or product_id='" + product_id + "'";
+            String sql = "select * from products";
             ResultSet rs = stm.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
 
-            DefaultTableModel tableModel = new DefaultTableModel();
-            tableProducts.setModel(tableModel);
-
-            while(rs.next()){
-                tableModel.addRow();
+            DefaultTableModel tableModel = (DefaultTableModel) tableElements.getModel();
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String[cols];
+            for(int i =0;i<cols;i++){
+                colName[i] = rsmd.getColumnName(i+1);
             }
+            tableModel.setColumnIdentifiers(colName);
+            
+            
+            while(rs.next()){
+                tableModel.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+            }
+            stm.close();
+            con.close();
+
+            
         }catch(Exception e){
             System.out.println(e.getMessage());
 
@@ -295,40 +276,16 @@ public class ViewProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchProductActionPerformed
 
     private void tableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMouseClicked
-        tableProducts.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            @Override
-            public void valueChanged(ListSelectionEvent event){
-                txtSelectedProduct.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString());
-            }
-        });
+
     }//GEN-LAST:event_tableProductsMouseClicked
 
     private void tableProducts1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProducts1MouseClicked
-        tableProducts.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            @Override
-            public void valueChanged(ListSelectionEvent event){
-                txtSelectedProduct.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString());
-            }
-        });
+       
     }//GEN-LAST:event_tableProducts1MouseClicked
 
     private void tableProducts2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProducts2MouseClicked
-        tableProducts.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            @Override
-            public void valueChanged(ListSelectionEvent event){
-                txtSelectedProduct.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString());
-            }
-        });
-    }//GEN-LAST:event_tableProducts2MouseClicked
 
-    private void tableProdutsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutsMouseClicked
-        tableProducts.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            @Override
-            public void valueChanged(ListSelectionEvent event){
-                txtSelectedProduct.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString());
-            }
-        });
-    }//GEN-LAST:event_tableProdutsMouseClicked
+    }//GEN-LAST:event_tableProducts2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -371,14 +328,14 @@ public class ViewProduct extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblProductID;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblViewProducts;
+    private javax.swing.JTable tableElements;
     private javax.swing.JTable tableProducts;
     private javax.swing.JTable tableProducts1;
     private javax.swing.JTable tableProducts2;
-    private javax.swing.JTable tableProduts;
     private javax.swing.JTextField txtProductID;
     private javax.swing.JTextField txtProductName;
     // End of variables declaration//GEN-END:variables
