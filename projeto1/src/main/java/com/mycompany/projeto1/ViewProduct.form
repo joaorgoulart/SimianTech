@@ -35,7 +35,9 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="scrPaneProducts" min="-2" pref="308" max="-2" attributes="0"/>
-                      <EmptySpace pref="328" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnRefresh" min="-2" pref="93" max="-2" attributes="0"/>
+                      <EmptySpace pref="217" max="32767" attributes="0"/>
                       <Component id="btnClose" min="-2" pref="93" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -48,7 +50,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnClose" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnClose" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="btnRefresh" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="lblViewProducts" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -81,16 +86,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Microsoft New Tai Lue" size="14" style="0"/>
             </Property>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="Produto 1"/>
-                <StringItem index="1" value="Produto 2"/>
-                <StringItem index="2" value="Produto 3"/>
-                <StringItem index="3" value="Produto 4"/>
-                <StringItem index="4" value="Produto 5"/>
-                <StringItem index="5" value="Produto 6"/>
-              </StringArray>
-            </Property>
             <Property name="valueIsAdjusting" type="boolean" value="true"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
@@ -112,6 +107,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCloseActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRefresh">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Microsoft New Tai Lue" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Atualizar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -5,6 +5,9 @@
 package com.mycompany.projeto1;
 
 import java.sql.*;
+import java.util.Vector;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -32,6 +35,7 @@ public class ViewProduct extends javax.swing.JFrame {
         scrPaneProducts = new javax.swing.JScrollPane();
         listProducts = new javax.swing.JList<>();
         btnClose = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
@@ -40,11 +44,6 @@ public class ViewProduct extends javax.swing.JFrame {
         lblViewProducts.setText("Produtos");
 
         listProducts.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
-        listProducts.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Produto 1", "Produto 2", "Produto 3", "Produto 4", "Produto 5", "Produto 6" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listProducts.setValueIsAdjusting(true);
         listProducts.setVerifyInputWhenFocusTarget(false);
         scrPaneProducts.setViewportView(listProducts);
@@ -55,6 +54,14 @@ public class ViewProduct extends javax.swing.JFrame {
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
+            }
+        });
+
+        btnRefresh.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
+        btnRefresh.setText("Atualizar");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
             }
         });
 
@@ -70,7 +77,9 @@ public class ViewProduct extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(scrPaneProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
         );
@@ -79,7 +88,9 @@ public class ViewProduct extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblViewProducts)
                         .addGap(18, 18, 18)
@@ -93,6 +104,27 @@ public class ViewProduct extends javax.swing.JFrame {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        try{
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+                    
+                    String sql = "select product_name from products";
+                    PreparedStatement p = con.prepareStatement(sql);
+                    ResultSet rs = p.executeQuery();
+                    
+                    DefaultListModel listModel = new DefaultListModel();
+                    listProducts.setModel(listModel);
+             
+                    while(rs.next()){
+                       listModel.addElement(rs.getString("product_name"));
+                    }
+               }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,24 +156,6 @@ public class ViewProduct extends javax.swing.JFrame {
         /* Tentando colocar os nomes pra mostrar */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try{
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
-                    
-                    String sql = "select product_name from products";
-                    ResultSet rs = p.executeQuery();
-                    
-                    while(rs.next()){
-                       for(int i = 0;i < 30;i++){
-                        //String names[i] = {"1","2"};
-                        rs.getString("product_name");
-                    }
-                    }
-                 
-                    
-               }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
                 new ViewProduct().setVisible(true);
             }
         });
@@ -149,6 +163,7 @@ public class ViewProduct extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel lblViewProducts;
     private javax.swing.JList<String> listProducts;
     private javax.swing.JScrollPane scrPaneProducts;
