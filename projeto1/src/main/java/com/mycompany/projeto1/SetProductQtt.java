@@ -4,6 +4,11 @@
  */
 package com.mycompany.projeto1;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author jrgou
@@ -29,7 +34,7 @@ public class SetProductQtt extends javax.swing.JFrame {
         lblSetProductQtt = new javax.swing.JLabel();
         lblProductID = new javax.swing.JLabel();
         txtProductID = new javax.swing.JTextField();
-        btnSelect = new javax.swing.JButton();
+        btnSearchProduct = new javax.swing.JButton();
         panelProduct = new javax.swing.JPanel();
         txtShowProductName = new javax.swing.JTextField();
         txtShowProductID = new javax.swing.JTextField();
@@ -44,7 +49,6 @@ public class SetProductQtt extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
-        setMaximumSize(new java.awt.Dimension(504, 432));
         setMinimumSize(new java.awt.Dimension(504, 432));
         setResizable(false);
 
@@ -57,12 +61,12 @@ public class SetProductQtt extends javax.swing.JFrame {
         txtProductID.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         txtProductID.setMargin(new java.awt.Insets(6, 6, 6, 6));
 
-        btnSelect.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        btnSelect.setText("Buscar");
-        btnSelect.setPreferredSize(new java.awt.Dimension(84, 16));
-        btnSelect.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchProduct.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
+        btnSearchProduct.setText("Buscar");
+        btnSearchProduct.setPreferredSize(new java.awt.Dimension(84, 16));
+        btnSearchProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelectActionPerformed(evt);
+                btnSearchProductActionPerformed(evt);
             }
         });
 
@@ -71,6 +75,8 @@ public class SetProductQtt extends javax.swing.JFrame {
         txtShowProductName.setEditable(false);
         txtShowProductName.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         txtShowProductName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtShowProductName.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtShowProductName.setEnabled(false);
         txtShowProductName.setFocusable(false);
         txtShowProductName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +87,8 @@ public class SetProductQtt extends javax.swing.JFrame {
         txtShowProductID.setEditable(false);
         txtShowProductID.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         txtShowProductID.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtShowProductID.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtShowProductID.setEnabled(false);
         txtShowProductID.setFocusable(false);
         txtShowProductID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +178,7 @@ public class SetProductQtt extends javax.swing.JFrame {
                 .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         btnClose.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
@@ -196,7 +204,7 @@ public class SetProductQtt extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -209,7 +217,7 @@ public class SetProductQtt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -220,9 +228,25 @@ public class SetProductQtt extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSelectActionPerformed
+    private void btnSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchProductActionPerformed
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+
+            String product_id = txtProductID.getText();
+
+            Statement stm = con.createStatement();
+            String sql = "select * from products where product_id='" + product_id + "'";
+            ResultSet rs = stm.executeQuery(sql);
+
+            txtShowProductName.setText();
+            
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+
+        }
+    }//GEN-LAST:event_btnSearchProductActionPerformed
 
     private void txtShowProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtShowProductNameActionPerformed
         // TODO add your handling code here:
@@ -286,7 +310,7 @@ public class SetProductQtt extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddQtt;
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnSelect;
+    private javax.swing.JButton btnSearchProduct;
     private javax.swing.JButton btnUpdateQtt;
     private javax.swing.JLabel lblAvailableQtt;
     private javax.swing.JLabel lblCustomQtt;

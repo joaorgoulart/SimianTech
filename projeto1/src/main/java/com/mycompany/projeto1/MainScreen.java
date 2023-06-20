@@ -82,6 +82,11 @@ public class MainScreen extends javax.swing.JFrame {
         btnGenReport.setText("Emitir Relatórios");
         btnGenReport.setFocusPainted(false);
         btnGenReport.setPreferredSize(new java.awt.Dimension(130, 60));
+        btnGenReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenReportActionPerformed(evt);
+            }
+        });
 
         btnLogOff.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
         btnLogOff.setText("Sair");
@@ -186,7 +191,9 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOffActionPerformed
 
     private void btnRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProductActionPerformed
-        // TODO add your handling code here:
+        RemoveProduct form1 = new RemoveProduct();
+        
+        form1.setVisible(true);
     }//GEN-LAST:event_btnRemoveProductActionPerformed
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
@@ -204,6 +211,12 @@ public class MainScreen extends javax.swing.JFrame {
         
         form1.setVisible(true);
     }//GEN-LAST:event_btnSetProductQttActionPerformed
+
+    private void btnGenReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenReportActionPerformed
+        GenerateReport form1 = new GenerateReport();
+        
+        form1.setVisible(true);
+    }//GEN-LAST:event_btnGenReportActionPerformed
 
     /**
      * @param args the command line arguments

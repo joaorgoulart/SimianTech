@@ -243,8 +243,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        //Login test fino do fino
-        try{
+        //Login test 
+        /**try{
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
         
@@ -274,19 +274,19 @@ public class Login extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e.getMessage());
             
-        }
+        }**/
         
         
         
         // Old code
-        //if(txtLogin.getText().equals("admin") && new String(txtPassword.getPassword()).equals("123456")){
-           // MainScreen form1 = new MainScreen();
+        if(txtLogin.getText().equals("admin") && new String(txtPassword.getPassword()).equals("123456")){
+            MainScreen form1 = new MainScreen();
     
-            //form1.setVisible(true);
-            //this.setVisible(false);
-       // }else{
-          // lblInvalidLogin.setVisible(true);
-       // }
+            form1.setVisible(true);
+            this.setVisible(false);
+        }else{
+           lblInvalidLogin.setVisible(true);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void chkBoxShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkBoxShowPasswordActionPerformed
