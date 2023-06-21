@@ -34,13 +34,13 @@ public class Reservation extends javax.swing.JFrame {
         lblAddProduct = new javax.swing.JLabel();
         spnnProductQtt = new javax.swing.JSpinner();
         txtClientName = new javax.swing.JTextField();
-        btnAddProduct = new javax.swing.JButton();
+        btnReserve = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblProductName = new javax.swing.JLabel();
         lblUserID = new javax.swing.JLabel();
         lblProductQtt = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtProductName.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         txtProductName.setMargin(new java.awt.Insets(6, 6, 6, 6));
@@ -58,11 +58,11 @@ public class Reservation extends javax.swing.JFrame {
             }
         });
 
-        btnAddProduct.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        btnAddProduct.setText("Reservar");
-        btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
+        btnReserve.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
+        btnReserve.setText("Reservar");
+        btnReserve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddProductActionPerformed(evt);
+                btnReserveActionPerformed(evt);
             }
         });
 
@@ -95,7 +95,7 @@ public class Reservation extends javax.swing.JFrame {
                     .addComponent(spnnProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReserve, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -130,7 +130,7 @@ public class Reservation extends javax.swing.JFrame {
                 .addComponent(spnnProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReserve, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -138,7 +138,7 @@ public class Reservation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
+    private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReserveActionPerformed
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
@@ -148,12 +148,13 @@ public class Reservation extends javax.swing.JFrame {
             int quantity = (int) spnnProductQtt.getValue();
 
             Statement stm1 = con.createStatement();
-            String sql1 = "select * from products where product_name '"+product_name+"'";
+            String sql1 = "select * from products where product_name='"+product_name+"'";
             ResultSet rs = stm1.executeQuery(sql1);
             
             while(rs.next()){
                 if(rs.getInt(4) >= quantity){
-                    String sql2 = "insert into reservation (client_name, product_name, quantity)"+"values(?,?,?)";
+                    int currentQtt = rs.getInt(4) - quantity;
+                    String sql2 = "insert into reserved(client_name, product_name, quantity)"+"values(?,?,?)";
                     PreparedStatement stm2 = con.prepareStatement(sql2);
                     stm2.setString(1,client_name);
                     stm2.setString(2, product_name);
@@ -161,7 +162,7 @@ public class Reservation extends javax.swing.JFrame {
                     stm2.execute();
                     stm2.close();
                     
-                    String sql3 = "update products set quantity='"+quantity+"' where product_name='"+product_name+"'";
+                    String sql3 = "update products set quantity='"+currentQtt+"' where product_name='"+product_name+"'";
                     PreparedStatement stm3 = con.prepareStatement(sql3);
                     stm3.executeUpdate(sql3);
                     stm3.close();
@@ -175,12 +176,12 @@ public class Reservation extends javax.swing.JFrame {
 
             txtProductName.setText("");
             txtClientName.setText("");
-            spnnProductQtt.setValue("0");
+            spnnProductQtt.setValue(0);
 
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "ID do produto já existente");
+            
         }
-    }//GEN-LAST:event_btnAddProductActionPerformed
+    }//GEN-LAST:event_btnReserveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
@@ -226,8 +227,8 @@ public class Reservation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddProduct;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnReserve;
     private javax.swing.JLabel lblAddProduct;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblProductQtt;

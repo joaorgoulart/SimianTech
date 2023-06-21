@@ -45,7 +45,6 @@ public class SetProductQtt extends javax.swing.JFrame {
         lblCustomQtt = new javax.swing.JLabel();
         btnUpdateQtt = new javax.swing.JButton();
         spinnerQtt = new javax.swing.JSpinner();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -116,29 +115,24 @@ public class SetProductQtt extends javax.swing.JFrame {
 
         spinnerQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
 
-        jFormattedTextField1.setText("jFormattedTextField1");
-
         javax.swing.GroupLayout panelProductLayout = new javax.swing.GroupLayout(panelProduct);
         panelProduct.setLayout(panelProductLayout);
         panelProductLayout.setHorizontalGroup(
             panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProductLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtShowProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAvailableQtt)
+                    .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProductName))
+                .addGap(26, 26, 26)
+                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCustomQtt)
                     .addGroup(panelProductLayout.createSequentialGroup()
-                        .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtShowProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAvailableQtt)
-                            .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProductName))
-                        .addGap(26, 26, 26)
-                        .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCustomQtt)
-                            .addGroup(panelProductLayout.createSequentialGroup()
-                                .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUpdateQtt)))))
+                        .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnUpdateQtt)))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         panelProductLayout.setVerticalGroup(
@@ -147,9 +141,7 @@ public class SetProductQtt extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(lblProductName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAvailableQtt)
@@ -312,7 +304,6 @@ public class SetProductQtt extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSearchProduct;
     private javax.swing.JButton btnUpdateQtt;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel lblAvailableQtt;
     private javax.swing.JLabel lblCustomQtt;
     private javax.swing.JLabel lblProductID;

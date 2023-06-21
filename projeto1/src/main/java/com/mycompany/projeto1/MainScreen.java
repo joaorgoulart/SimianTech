@@ -107,6 +107,11 @@ public class MainScreen extends javax.swing.JFrame {
         btnReserveProduct.setText("Reservar Produto");
         btnReserveProduct.setFocusPainted(false);
         btnReserveProduct.setPreferredSize(new java.awt.Dimension(130, 60));
+        btnReserveProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReserveProductActionPerformed(evt);
+            }
+        });
 
         lblMainScreen.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
         lblMainScreen.setText("Sistema de Gerenciamento de Estoque");
@@ -220,6 +225,13 @@ public class MainScreen extends javax.swing.JFrame {
         
         form1.setVisible(true);
     }//GEN-LAST:event_btnGenReportActionPerformed
+
+    private void btnReserveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReserveProductActionPerformed
+        // TODO add your handling code here:
+        Reservation form1 = new Reservation();
+        
+        form1.setVisible(true);
+    }//GEN-LAST:event_btnReserveProductActionPerformed
 
     public void setBtnAddOff(){
         btnAddProduct.setEnabled(false);

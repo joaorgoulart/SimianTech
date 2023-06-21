@@ -160,39 +160,46 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         //TESTE adicionando produtos na table
-        
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
-        
-        
-        String product_id = txtProductID.getText();
-        String product_name = txtProductName.getText();
-        String user_id = txtUserID.getText();
-        int quantity = (int) spnnProductQtt.getValue();
-        
-        String sql = "insert into products (product_name, user_id,product_id,quantity)"+"values(?,?,?,?)";
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setString(1,product_name);
-        stm.setString(2,user_id);
-        stm.setString(3,product_id);
-        stm.setInt(4,quantity);
-        
-        stm.execute();
-        stm.close();
-       JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso");
-       
-       txtProductID.setText("");
-       txtProductName.setText("");
-       txtUserID.setText("");
-       spnnProductQtt.setValue("0");
-       
-       
-       
-       
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "ID do produto já existente");
-        }
+        int value = (int) spnnProductQtt.getValue();
+        if(value >= 0){
+            try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+
+
+            String product_id = txtProductID.getText();
+            String product_name = txtProductName.getText();
+            String user_id = txtUserID.getText();
+            int quantity = (int) spnnProductQtt.getValue();
+            
+            Statement stm1 = con.createStatement();
+            String sql1 = "select * from products where product_id='"+product_id+"'";
+            ResultSet rs = stm1.executeQuery(sql1);
+            if(rs.next()){
+                JOptionPane.showMessageDialog(this, "ID do produto já existente");
+                txtProductID.setText("");}
+            else{
+                String sql = "insert into products (product_name, user_id,product_id,quantity)"+"values(?,?,?,?)";
+                PreparedStatement stm = con.prepareStatement(sql);
+                stm.setString(1,product_name);
+                stm.setString(2,user_id);
+                stm.setString(3,product_id);
+                stm.setInt(4,quantity);
+
+                stm.execute();
+                stm.close();
+               JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso");
+
+               txtProductID.setText("");
+               txtProductName.setText("");
+               txtUserID.setText("");
+               spnnProductQtt.setValue(0);
+            }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }}else{
+                JOptionPane.showMessageDialog(this, "Quantidade inválida");
+                spnnProductQtt.setValue(0);}
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
