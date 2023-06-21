@@ -5,6 +5,7 @@
 package com.mycompany.projeto1;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -205,7 +206,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Selecione a operação desejada e preencha os campos necessários.");
     }//GEN-LAST:event_btnHelpActionPerformed
 
     private void btnSetProductQttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetProductQttActionPerformed
