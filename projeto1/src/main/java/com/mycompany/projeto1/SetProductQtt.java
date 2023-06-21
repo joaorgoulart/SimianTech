@@ -6,8 +6,10 @@ package com.mycompany.projeto1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,14 +39,13 @@ public class SetProductQtt extends javax.swing.JFrame {
         btnSearchProduct = new javax.swing.JButton();
         panelProduct = new javax.swing.JPanel();
         txtShowProductName = new javax.swing.JTextField();
-        txtShowProductID = new javax.swing.JTextField();
+        txtShowProductQtt = new javax.swing.JTextField();
         lblProductName = new javax.swing.JLabel();
         lblAvailableQtt = new javax.swing.JLabel();
         lblCustomQtt = new javax.swing.JLabel();
-        txtShowProductID1 = new javax.swing.JTextField();
         btnUpdateQtt = new javax.swing.JButton();
         spinnerQtt = new javax.swing.JSpinner();
-        btnAddQtt = new javax.swing.JButton();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,7 +76,7 @@ public class SetProductQtt extends javax.swing.JFrame {
         txtShowProductName.setEditable(false);
         txtShowProductName.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         txtShowProductName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtShowProductName.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtShowProductName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtShowProductName.setEnabled(false);
         txtShowProductName.setFocusable(false);
         txtShowProductName.addActionListener(new java.awt.event.ActionListener() {
@@ -84,15 +85,15 @@ public class SetProductQtt extends javax.swing.JFrame {
             }
         });
 
-        txtShowProductID.setEditable(false);
-        txtShowProductID.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        txtShowProductID.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtShowProductID.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtShowProductID.setEnabled(false);
-        txtShowProductID.setFocusable(false);
-        txtShowProductID.addActionListener(new java.awt.event.ActionListener() {
+        txtShowProductQtt.setEditable(false);
+        txtShowProductQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
+        txtShowProductQtt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtShowProductQtt.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtShowProductQtt.setEnabled(false);
+        txtShowProductQtt.setFocusable(false);
+        txtShowProductQtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtShowProductIDActionPerformed(evt);
+                txtShowProductQttActionPerformed(evt);
             }
         });
 
@@ -103,16 +104,7 @@ public class SetProductQtt extends javax.swing.JFrame {
         lblAvailableQtt.setText("Quantidade Disponível");
 
         lblCustomQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        lblCustomQtt.setText("Quantidade Personalizada");
-
-        txtShowProductID1.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        txtShowProductID1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtShowProductID1.setFocusable(false);
-        txtShowProductID1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtShowProductID1ActionPerformed(evt);
-            }
-        });
+        lblCustomQtt.setText("Quantidade Atualizada");
 
         btnUpdateQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         btnUpdateQtt.setText("Atualizar");
@@ -124,13 +116,7 @@ public class SetProductQtt extends javax.swing.JFrame {
 
         spinnerQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
 
-        btnAddQtt.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        btnAddQtt.setText("Atualizar");
-        btnAddQtt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddQttActionPerformed(evt);
-            }
-        });
+        jFormattedTextField1.setText("jFormattedTextField1");
 
         javax.swing.GroupLayout panelProductLayout = new javax.swing.GroupLayout(panelProduct);
         panelProduct.setLayout(panelProductLayout);
@@ -138,14 +124,11 @@ public class SetProductQtt extends javax.swing.JFrame {
             panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProductLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelProductLayout.createSequentialGroup()
-                        .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddQtt))
+                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelProductLayout.createSequentialGroup()
                         .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtShowProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtShowProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAvailableQtt)
                             .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblProductName))
@@ -153,10 +136,10 @@ public class SetProductQtt extends javax.swing.JFrame {
                         .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCustomQtt)
                             .addGroup(panelProductLayout.createSequentialGroup()
-                                .addComponent(txtShowProductID1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnUpdateQtt)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         panelProductLayout.setVerticalGroup(
             panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,21 +147,19 @@ public class SetProductQtt extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(lblProductName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtShowProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAvailableQtt)
                     .addComponent(lblCustomQtt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtShowProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtShowProductID1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(txtShowProductQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinnerQtt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         btnClose.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
@@ -238,8 +219,11 @@ public class SetProductQtt extends javax.swing.JFrame {
             Statement stm = con.createStatement();
             String sql = "select * from products where product_id='" + product_id + "'";
             ResultSet rs = stm.executeQuery(sql);
-
-            txtShowProductName.setText(rs.getString("product_name"));
+            
+            while(rs.next()){
+            txtShowProductName.setText(rs.getString(1));
+            txtShowProductQtt.setText(rs.getString(4));
+            }
             
             
         }catch(Exception e){
@@ -252,21 +236,38 @@ public class SetProductQtt extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtShowProductNameActionPerformed
 
-    private void txtShowProductIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtShowProductIDActionPerformed
+    private void txtShowProductQttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtShowProductQttActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtShowProductIDActionPerformed
-
-    private void txtShowProductID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtShowProductID1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtShowProductID1ActionPerformed
+    }//GEN-LAST:event_txtShowProductQttActionPerformed
 
     private void btnUpdateQttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateQttActionPerformed
         // TODO add your handling code here:
+        int value = (int) spinnerQtt.getValue();
+        if(value >= 0){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+            
+            String sql = "update products set quantity='"+spinnerQtt.getValue()+"' where product_id='"+txtProductID.getText()+"'";
+            
+     
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.executeUpdate(sql);
+            
+            txtShowProductName.setText("");
+            txtShowProductQtt.setText("");
+            txtProductID.setText("");
+            spinnerQtt.setValue(0);
+            JOptionPane.showMessageDialog(this, "Quantidade do produto atualizada");
+            
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            
+        }}else{
+            JOptionPane.showMessageDialog(this, "Quantidade inválida");
+            spinnerQtt.setValue(0);}
     }//GEN-LAST:event_btnUpdateQttActionPerformed
-
-    private void btnAddQttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQttActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddQttActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
@@ -308,10 +309,10 @@ public class SetProductQtt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddQtt;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSearchProduct;
     private javax.swing.JButton btnUpdateQtt;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel lblAvailableQtt;
     private javax.swing.JLabel lblCustomQtt;
     private javax.swing.JLabel lblProductID;
@@ -320,8 +321,7 @@ public class SetProductQtt extends javax.swing.JFrame {
     private javax.swing.JPanel panelProduct;
     private javax.swing.JSpinner spinnerQtt;
     private javax.swing.JTextField txtProductID;
-    private javax.swing.JTextField txtShowProductID;
-    private javax.swing.JTextField txtShowProductID1;
     private javax.swing.JTextField txtShowProductName;
+    private javax.swing.JTextField txtShowProductQtt;
     // End of variables declaration//GEN-END:variables
 }

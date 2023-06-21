@@ -261,6 +261,14 @@ public class Login extends javax.swing.JFrame {
         if(rs.next()){
             dispose();
             MainScreen ms = new MainScreen();
+            if(rs.getInt(1) == 2){
+                ms.setBtnAddOff();
+                ms.setBtnGenReportOff();
+                ms.setBtnRemoveProductOff();
+                ms.setBtnSetProductQttOff();
+            }else if(rs.getInt(1) == 3){
+                ms.setBtnReserveProductOff();
+            }
             ms.show();  
         }else{
             JOptionPane.showMessageDialog(this, "Login ou senha incorretos");

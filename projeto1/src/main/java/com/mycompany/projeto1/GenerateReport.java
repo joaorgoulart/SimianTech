@@ -4,6 +4,13 @@
  */
 package com.mycompany.projeto1;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jrgou
@@ -27,55 +34,16 @@ public class GenerateReport extends javax.swing.JFrame {
     private void initComponents() {
 
         lblViewProducts = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableReport = new javax.swing.JTable();
         btnClose = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtArea = new javax.swing.JTextArea();
+        btnGenLog = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         lblViewProducts.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
         lblViewProducts.setText("Relatório");
-
-        tableReport.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID do Usuário", "Ação", "Produto", "Quantidade"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableReport.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tableReport);
-        if (tableReport.getColumnModel().getColumnCount() > 0) {
-            tableReport.getColumnModel().getColumn(0).setMinWidth(20);
-            tableReport.getColumnModel().getColumn(0).setPreferredWidth(60);
-            tableReport.getColumnModel().getColumn(0).setMaxWidth(180);
-            tableReport.getColumnModel().getColumn(1).setMinWidth(30);
-            tableReport.getColumnModel().getColumn(1).setPreferredWidth(70);
-            tableReport.getColumnModel().getColumn(1).setMaxWidth(220);
-            tableReport.getColumnModel().getColumn(2).setMinWidth(30);
-            tableReport.getColumnModel().getColumn(2).setPreferredWidth(100);
-            tableReport.getColumnModel().getColumn(2).setMaxWidth(220);
-            tableReport.getColumnModel().getColumn(3).setMinWidth(20);
-            tableReport.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tableReport.getColumnModel().getColumn(3).setMaxWidth(180);
-        }
 
         btnClose.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         btnClose.setText("Fechar");
@@ -85,17 +53,32 @@ public class GenerateReport extends javax.swing.JFrame {
             }
         });
 
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane2.setViewportView(txtArea);
+
+        btnGenLog.setText("Gerar Relatório");
+        btnGenLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenLogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGenLog, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblViewProducts)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(336, 336, 336)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,10 +87,12 @@ public class GenerateReport extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(lblViewProducts)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGenLog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,6 +101,29 @@ public class GenerateReport extends javax.swing.JFrame {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnGenLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenLogActionPerformed
+        // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","password");
+    
+            Statement stm = con.createStatement();
+            String sql = "select * from products";
+            ResultSet rs = stm.executeQuery(sql);
+            txtArea.append("Relatório completo do estoque\n");
+            while(rs.next()){
+                txtArea.append(rs.getString(4)+" unidades disponíveis de "+ rs.getString(1)+" #"+rs.getString(3)+"\n");
+            }
+            stm.close();
+            con.close();
+
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+
+        }
+    }//GEN-LAST:event_btnGenLogActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,6 +152,7 @@ public class GenerateReport extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -154,8 +163,9 @@ public class GenerateReport extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton btnGenLog;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblViewProducts;
-    private javax.swing.JTable tableReport;
+    private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
 }

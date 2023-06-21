@@ -4,6 +4,8 @@
  */
 package com.mycompany.projeto1;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author jrgou
@@ -218,6 +220,21 @@ public class MainScreen extends javax.swing.JFrame {
         form1.setVisible(true);
     }//GEN-LAST:event_btnGenReportActionPerformed
 
+    public void setBtnAddOff(){
+        btnAddProduct.setEnabled(false);
+    }
+    public void setBtnReserveProductOff(){
+        btnReserveProduct.setEnabled(false);
+    }
+    public void setBtnGenReportOff(){
+        btnGenReport.setEnabled(false);
+    }
+    public void setBtnRemoveProductOff(){
+        btnRemoveProduct.setEnabled(false);
+    }
+    public void setBtnSetProductQttOff(){
+        btnSetProductQtt.setEnabled(false);
+    }
     /**
      * @param args the command line arguments
      */

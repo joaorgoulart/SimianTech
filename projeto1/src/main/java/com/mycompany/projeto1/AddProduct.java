@@ -191,7 +191,7 @@ public class AddProduct extends javax.swing.JFrame {
        
        
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "ID do produto já existente");
         }
     }//GEN-LAST:event_btnAddProductActionPerformed
 

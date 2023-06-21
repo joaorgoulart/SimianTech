@@ -170,7 +170,7 @@ public class ViewProduct extends javax.swing.JFrame {
             String product_id = txtProductID.getText();
 
             Statement stm = con.createStatement();
-            String sql = "select * from products where product_name='"+product_name+"' or product_id='"+product_id+"'";
+            String sql = "select * from products where product_name like '%"+product_name+"%' or product_id='"+product_id+"'";
             ResultSet rs = stm.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
 

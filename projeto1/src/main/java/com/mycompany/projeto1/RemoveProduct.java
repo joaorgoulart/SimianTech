@@ -42,8 +42,6 @@ public class RemoveProduct extends javax.swing.JFrame {
         btnSearchProduct = new javax.swing.JButton();
         pnlRemoveProduct = new javax.swing.JPanel();
         btnRemoveProduct = new javax.swing.JButton();
-        lblUserID = new javax.swing.JLabel();
-        txtUserID = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
         lblSelectedProduct = new javax.swing.JLabel();
         txtSelectedProduct = new javax.swing.JTextField();
@@ -63,8 +61,8 @@ public class RemoveProduct extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(500, 250, 0, 0));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(500, 200, 0, 0));
         setResizable(false);
 
         txtProductID.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
@@ -110,17 +108,6 @@ public class RemoveProduct extends javax.swing.JFrame {
             }
         });
 
-        lblUserID.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        lblUserID.setText("ID do Usuário");
-
-        txtUserID.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        txtUserID.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        txtUserID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserIDActionPerformed(evt);
-            }
-        });
-
         btnCancel.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +121,7 @@ public class RemoveProduct extends javax.swing.JFrame {
 
         txtSelectedProduct.setEditable(false);
         txtSelectedProduct.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        txtSelectedProduct.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtSelectedProduct.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtSelectedProduct.setEnabled(false);
         txtSelectedProduct.setMargin(new java.awt.Insets(6, 6, 6, 6));
         txtSelectedProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -157,9 +144,7 @@ public class RemoveProduct extends javax.swing.JFrame {
                     .addGroup(pnlRemoveProductLayout.createSequentialGroup()
                         .addGroup(pnlRemoveProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSelectedProduct)
-                            .addComponent(txtSelectedProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUserID)
-                            .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSelectedProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(12, 12, 12))
         );
@@ -170,11 +155,7 @@ public class RemoveProduct extends javax.swing.JFrame {
                 .addComponent(lblSelectedProduct)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSelectedProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblUserID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(pnlRemoveProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,16 +164,18 @@ public class RemoveProduct extends javax.swing.JFrame {
 
         tableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
         tableProducts.getTableHeader().setReorderingAllowed(false);
+        tableProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductsMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableProducts);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -255,28 +238,34 @@ public class RemoveProduct extends javax.swing.JFrame {
             String product_id = txtProductID.getText();
 
             Statement stm = con.createStatement();
-            String sql = "select * from products where product_name='" + product_name + "' or product_id='" + product_id + "'";
+            String sql = "select * from products where product_name like '%"+product_name+"%' or product_id='"+product_id+"'";
             ResultSet rs = stm.executeQuery(sql);
-            
-            DefaultTableModel tableModel = new DefaultTableModel();
-            tableProducts.setModel(tableModel);
-            
-            while(rs.next()){
-                tableModel.addRow(new Object[]{rs.getInt("user_id"),rs.getString("product_name"),rs.getInt("quantity")});  
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            DefaultTableModel tableModel = (DefaultTableModel) tableProducts.getModel();
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String[cols];
+            for(int i =0;i<cols;i++){
+                colName[i] = rsmd.getColumnName(i+1);
             }
+            tableModel.setColumnIdentifiers(colName);
+          
+            while(rs.next()){
+                tableModel.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+            }
+            stm.close();
+            con.close();
+
+            
         }catch(Exception e){
             System.out.println(e.getMessage());
-            
+
         }
     }//GEN-LAST:event_btnSearchProductActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void txtUserIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserIDActionPerformed
 
     private void txtProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductNameActionPerformed
         // TODO add your handling code here:
@@ -293,18 +282,28 @@ public class RemoveProduct extends javax.swing.JFrame {
 
             String product_name = tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString();
 
-            Statement stm = con.createStatement();
-            String sql = "select * from products where product_name='" + product_name + "'";
-            ResultSet rs = stm.executeQuery(sql);
+            
+            String sql = "delete from products where product_name='"+product_name+"'";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.executeUpdate(sql);
             
             DefaultTableModel tableModel = new DefaultTableModel();
             tableProducts.setModel(tableModel);
+            
+            if(tableProducts.getSelectedRow() != -1)
+                tableModel.removeRow(tableProducts.getSelectedRow());
+            btnSearchProductActionPerformed(evt);
             
         }catch(Exception e){
             System.out.println(e.getMessage());
             
         }
     }//GEN-LAST:event_btnRemoveProductActionPerformed
+
+    private void tableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMouseClicked
+        // TODO add your handling code here:
+        txtSelectedProduct.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString());
+    }//GEN-LAST:event_tableProductsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -351,12 +350,10 @@ public class RemoveProduct extends javax.swing.JFrame {
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblRemoveProduct;
     private javax.swing.JLabel lblSelectedProduct;
-    private javax.swing.JLabel lblUserID;
     private javax.swing.JPanel pnlRemoveProduct;
     private javax.swing.JTable tableProducts;
     private javax.swing.JTextField txtProductID;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtSelectedProduct;
-    private javax.swing.JTextField txtUserID;
     // End of variables declaration//GEN-END:variables
 }
